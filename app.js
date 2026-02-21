@@ -1,48 +1,49 @@
-body {
-font-family: Arial, sans-serif;
-margin: 0;
-background: #f4f4f4;
-text-align: center;
+let operacionActual = null;
+
+function calcular() {
+let cliente = document.getElementById("cliente").value;
+let monto = parseFloat(document.getElementById("monto").value);
+let descuento = parseFloat(document.getElementById("descuento").value);
+
+if (!cliente || !monto || !descuento) {
+alert("Completar todos los campos");
+return;
 }
 
-h1 {
-margin-top: 20px;
+let total = monto - (monto * descuento / 100);
+
+operacionActual = {
+cliente: cliente,
+total: total
+};
+
+document.getElementById("resultadoTexto").innerText =
+"Total con descuento: $" + total.toFixed(2);
 }
 
-.center {
-margin-top: 100px;
+function guardarOperacion() {
+if (!operacionActual) return;
+
+let historial = JSON.parse(localStorage.getItem("historial") || "[]");
+historial.push(operacionActual);
+
+localStorage.setItem("historial", JSON.stringify(historial));
+cargarHistorial();
 }
 
-input {
-padding: 10px;
-margin: 5px;
-width: 80%;
-max-width: 250px;
+function cargarHistorial() {
+let historial = JSON.parse(localStorage.getItem("historial") || "[]");
+let div = document.getElementById("historial");
+div.innerHTML = "";
+let totalMes = 0;
+
+historial.forEach(op => {
+div.innerHTML += `<p>${op.cliente} - $${op.total.toFixed(2)}</p>`;
+totalMes += op.total;
+});
+
+document.getElementById("stats").innerText =
+"Total generado: $" + totalMes.toFixed(2);
 }
 
-button {
-padding: 10px 15px;
-margin: 10px;
-background: #ff0000;
-color: white;
-border: none;
-border-radius: 5px;
-}
-
-button:hover {
-background: #cc0000;
-}
-
-.card {
-background: white;
-margin: 15px auto;
-padding: 15px;
-border-radius: 10px;
-width: 90%;
-max-width: 400px;
-box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-}
-
-.hidden {
-display: none;
-}
+window.onload = cargarHistorial;
