@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liquida Pro</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Pantalla de Login -->
+<div id="loginScreen" class="center">
+<h2>Liquida Pro 🔐</h2>
+<input type="password" id="pinInput" placeholder="Ingresar PIN">
+<button onclick="checkPIN()">Entrar</button>
+</div>
+
+<!-- App principal -->
+<div id="app" class="hidden">
+
+<h1>Liquida Pro</h1>
+
+<div class="card">
+<input type="text" id="cliente" placeholder="Nombre del cliente">
+<input type="number" id="monto" placeholder="Monto">
+<input type="number" id="descuento" placeholder="% Descuento">
+<button onclick="calcular()">Calcular</button>
+</div>
+
+<div class="card resultado">
+<h3>Resultado</h3>
+<p id="resultadoTexto"></p>
+<button onclick="guardarOperacionActual()">Guardar</button>
+</div>
+
+<div class="card">
+<h3>Historial</h3>
+<div id="historial"></div>
+</div>
+
+<div class="card">
+<h3>Estadísticas</h3>
+<p id="stats"></p>
+</div>
+
+<button onclick="cerrarSesion()">Cerrar sesión</button>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
