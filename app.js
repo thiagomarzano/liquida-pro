@@ -1,3 +1,16 @@
+function checkPIN() {
+let ingreso = document.getElementById("pinInput").value;
+
+if (ingreso === "6497") {
+document.getElementById("loginScreen").classList.add("hidden");
+document.getElementById("app").classList.remove("hidden");
+} else {
+alert("PIN incorrecto");
+}
+}
+
+// ---------------- CALCULO ----------------
+
 let operacionActual = null;
 
 function calcular() {
@@ -45,5 +58,3 @@ totalMes += op.total;
 document.getElementById("stats").innerText =
 "Total generado: $" + totalMes.toFixed(2);
 }
-
-window.onload = cargarHistorial;
